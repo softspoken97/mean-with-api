@@ -1,0 +1,33 @@
+<mat-card class="workspace">
+    <mat-card-header>
+      <mat-card-title>Climate Scenarios Service Description</mat-card-title>
+        <mat-card-subtitle>Choose the Scenario to model for your experiment</mat-card-subtitle>
+    </mat-card-header>
+
+  <form class="search-form">
+    <mat-form-field class="search-full-width">
+      <input matInput placeholder="Scenario" aria-label="Scenario Selection" [matAutocomplete]="auto" [formControl]="scenarioCtrl">
+      <mat-autocomplete #auto="matAutocomplete">
+        <mat-option *ngFor="let scenario of filteredScenario | async" [(value)]='scenario.name'>
+
+        <span>{{scenario.name}}</span>
+        <small>{{scenario.id}}</small>
+        <small>{{scenario.epsg}}</small>
+        <small>{{scenario.modificationTime}}</small>
+        <small>{{scenario.url}}</small>
+
+        </mat-option>
+
+      </mat-autocomplete>
+    </mat-form-field>
+
+    <br>
+
+
+
+
+
+     </form>
+
+        <mat-card-actions></mat-card-actions>
+  </mat-card>

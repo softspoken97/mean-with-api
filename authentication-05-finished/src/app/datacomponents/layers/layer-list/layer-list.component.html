@@ -1,0 +1,22 @@
+<mat-card class="workspace">
+    <mat-card-header>
+      <mat-card-title>Environmental Layers Description</mat-card-title>
+        <mat-card-subtitle>Choose the layers for your experiment</mat-card-subtitle>
+    </mat-card-header>
+
+  <form class="search-form">
+    <mat-form-field class="search-full-width">
+      <input matInput placeholder="Layer" aria-label="Layer Selection" [matAutocomplete]="auto" [formControl]="layersCtrl">
+      <mat-autocomplete #auto="matAutocomplete">
+        <mat-option *ngFor="let layer of filteredLayers | async" [(value)]="layer.name">
+
+          <span>{{layer.name}}</span> |
+          <small>{{layer.id}}</small>
+        </mat-option>
+      </mat-autocomplete>
+    </mat-form-field>
+
+  </form>
+    <mat-card-content></mat-card-content>
+      <mat-card-actions></mat-card-actions>
+</mat-card>

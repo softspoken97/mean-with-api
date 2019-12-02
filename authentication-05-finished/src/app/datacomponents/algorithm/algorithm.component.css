@@ -1,0 +1,37 @@
+.details{
+  text-indent: 10px;
+  margin: 10px;
+}
+
+.workspace {
+  width: 100%;
+  min-height: 500;
+  background-color:rgb(240, 240, 240);
+  background-size: stretch;
+  opacity: 0.5;
+}
+
+.workspace:hover {
+  opacity: 1.0;
+  filter: alpha(opacity=100); /* For IE8 and earlier */
+}
+
+.search-form {
+  min-width: 150px;
+  max-width: 500px;
+  width: 100%;
+}
+
+.search-full-width {
+  width: 100%;
+}
+
+.option-radio-group {
+  display: flex;
+  flex-direction: column;
+  margin: 15px 0;
+}
+
+.option-radio-button {
+  margin: 5px;
+}

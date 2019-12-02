@@ -1,0 +1,43 @@
+<mat-card class="workspace">
+  <mat-card-header>
+    <mat-card-title>Selecting a species allows you to see how the predicted climate changes will effect both your local wildlife and those abroad</mat-card-title>
+      <mat-card-subtitle>Currently there are 6,586,578 species listed for selection</mat-card-subtitle>
+  </mat-card-header>
+
+<form class="search-form">
+  <mat-form-field class="search-full-width">
+    <input matInput placeholder="Species" aria-label="Species Selection" [matAutocomplete]="auto" [formControl]="speciesCtrl">
+    <mat-autocomplete #auto="matAutocomplete">
+      <mat-option *ngFor="let specie of filteredSpecies | async" [(value)]="specie.scientificName">
+
+        <span>{{specie.scientificName}}</span> |
+        <small>{{specie.key}}</small>
+      </mat-option>
+    </mat-autocomplete>
+  </mat-form-field>
+
+  <br>
+
+
+</form>
+
+
+
+  <mat-card-content>
+
+    <ul>
+      <li>Animalia: 3,882,670 Species</li>
+      <li>Fungi: 625,384 Species</li>
+      <li>Plantae: 1,824,165 Species</li>
+      <li>Mollusca: 401,758 Species</li>
+      <li>Arthropoda: 2,724,500 Species</li>
+      <li>Insecta: 2,303,010 Species</li>
+      <li>Magnoliopsida: 1,237,457 Species</li>
+      <li>Lepidoptera: 434,080 Species</li>
+      <li>Coleoptera: 732,659 Species</li>
+      <li>Tracheophyta: 1,690,591 Species</li>
+    </ul>
+  </mat-card-content>
+      <mat-card-actions></mat-card-actions>
+</mat-card>
+
