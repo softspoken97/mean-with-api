@@ -2,7 +2,7 @@ export interface IOccurrence {
   _id: string;
   url: string;
   epsg: number;
-  id: string;
+  id: number;
   name: string;
   modificationTime: Date;
 }

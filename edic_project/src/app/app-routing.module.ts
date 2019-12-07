@@ -9,12 +9,17 @@ import { EsriComponent } from './datacomponents/esri/esri.component';
 import { MetacrawlComponent } from './datacomponents/metacrawl/metacrawl.component';
 import { ExperimentComponent } from './datacomponents/experiment/experiment.component';
 import { StepperComponent } from './datacomponents/stepper/stepper.component';
-import { AlgorithmComponent } from './datacomponents/algorithm/algorithm.component';
+
 import { HomeComponent } from './datacomponents/home/home.component';
+
+// List components
 import { SpeciesListComponent } from './species/species-list/species-list.component';
-import { LayerListComponent } from './datacomponents/layers/layer-list/layer-list.component';
+import { OccurrenceListComponent } from './datacomponents/occurrence/occurrence-list/occurrence-list.component';
 import { ScenarioListComponent } from './datacomponents/scenario/scenario-list/scenario-list.component';
-import { OccurrenceListComponent } from './occurrence/occurrence-list/occurrence-list.component';
+import { LayerListComponent } from './datacomponents/layers/layer-list/layer-list.component';
+import { AlgorithmListComponent } from './datacomponents/algorithm/algorithm-list/algorithm-list.component';
+
+
 
 const routes: Routes = [
   { path: '', component: PostListComponent },
@@ -26,7 +31,7 @@ const routes: Routes = [
   { path: 'metacrawl', component: MetacrawlComponent },
   { path: 'experiment', component: ExperimentComponent },
   { path: 'stepper', component: StepperComponent },
-  { path: 'algorithm', component: AlgorithmComponent },
+  { path: 'algorithm', component: AlgorithmListComponent },
   { path: 'home', component: HomeComponent },
   { path: 'species-list-component', component: SpeciesListComponent },
   { path: 'occurrence-list-component', component: OccurrenceListComponent },

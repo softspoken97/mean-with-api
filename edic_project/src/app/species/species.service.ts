@@ -12,7 +12,7 @@ export class SpeciesService {
 
   API_KEY = 'YOUR_API_KEY';
 
-  private _url = 'http://localhost:3000/api/v1/species';
+  private _url = 'http://localhost:3000/api/v1/occurrences/getall';
 
   constructor(private httpClient: HttpClient) { }
 

@@ -14,7 +14,7 @@ API_KEY = 'YOUR_API_KEY';
 
   constructor(private httpClient: HttpClient) { }
 
-  getSpecies(): Observable<IScenario[]> {
+  getScenarios(): Observable<IScenario[]> {
     // tslint:disable-next-line: max-line-length
     return this.httpClient.get<IScenario[]>(this._url);
   }

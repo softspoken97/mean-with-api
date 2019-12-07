@@ -9,12 +9,13 @@ import { IOccurrence } from './occurrence.model';
 export class OccurrenceService {
   API_KEY = 'YOUR_API_KEY';
 
-  private _url = 'http://api.gbif.org/v1/species/suggest?datasetKey=d7dddbf4-2cf0-4f39-9b2a-bb099caae36c&q=Puma%20con';
+  private _url = 'http://localhost:3000/api/v1/occurrences/getall';
 
   constructor(private httpClient: HttpClient) { }
 
   getOccurrence(): Observable<IOccurrence[]> {
     // tslint:disable-next-line: max-line-length
+    //const url = this._url + '/getall';
     return this.httpClient.get<IOccurrence[]>(this._url);
   }
 }

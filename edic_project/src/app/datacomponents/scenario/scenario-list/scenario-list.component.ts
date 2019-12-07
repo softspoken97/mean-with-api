@@ -1,10 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input} from '@angular/core';
 import { Subscription, Observable } from 'rxjs';
 import {FormControl} from '@angular/forms';
 import {map, startWith} from 'rxjs/operators';
 import { ISpecies } from 'src/app/species/species.model';
 import { IScenario } from '../scenario.model';
 import { ScenarioService } from '../scenario.service';
+import { FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'app-scenario-list',
@@ -13,30 +14,40 @@ import { ScenarioService } from '../scenario.service';
 })
 export class ScenarioListComponent implements OnInit {
   selectedValue = '';
-  scenarioCtrl = new FormControl();
+  scenariosCtrl = new FormControl();
   filteredScenario: Observable<IScenario[]>;
   selectedScenario: '';
-  public scenario: IScenario[] = [
+  public scenarios: IScenario[] = [];
 
-      ];
   constructor(private scenarioService: ScenarioService) {
-    this.filteredScenario = this.scenarioCtrl.valueChanges
+    this.filteredScenario = this.scenariosCtrl.valueChanges
       .pipe(
         startWith(''),
         map(value => this._filterScenario(value))
       );
    }
 
+   @Input() expForm: FormGroup;
+
    private _filterScenario(value: string): IScenario[] {
     const filterValue = value.toLowerCase();
 
-    return this.scenario.filter(scenario => scenario.name.toLowerCase().indexOf(filterValue) === 0);
+    return this.scenarios.filter(scenario => scenario.name.toLowerCase().indexOf(filterValue) === 0);
   }
 
   ngOnInit() {
-    this.scenarioService.getSpecies()
-    .subscribe(data => this.scenario = data);
-    console.log(this.scenario);
+    this.scenarioService.getScenarios()
+    .subscribe(data => this.scenarios = data);
+    console.log(this.scenarios);
+    }
+
+    displayFn(scenario?: IScenario): string | undefined {
+      return scenario ? scenario.name : undefined;
+    }
+
+    save() {
+      this.expForm.get('scenariosForm').setValue(this.scenariosCtrl.value);
+      console.log(this.scenariosCtrl.value);
     }
   }
 

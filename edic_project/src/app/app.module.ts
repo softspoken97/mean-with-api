@@ -31,14 +31,17 @@ import { MatIconModule } from '@angular/material/icon';
 import { LayoutModule } from '@angular/cdk/layout';
 import { StepperComponent } from './datacomponents/stepper/stepper.component';
 import { MaterialModule } from './datacomponents/stepper/material-module';
-import { AlgorithmComponent } from './datacomponents/algorithm/algorithm.component';
 import { HomeComponent } from './datacomponents/home/home.component';
 import { FooterComponent } from './structure/footer/footer.component';
+
+import { SearchComponent } from './structure/search/search.component';
+
+// List Components
 import { SpeciesListComponent } from './species/species-list/species-list.component';
 import { ScenarioListComponent } from './datacomponents/scenario/scenario-list/scenario-list.component';
 import { LayerListComponent } from './datacomponents/layers/layer-list/layer-list.component';
-import { OccurrenceListComponent } from './occurrence/occurrence-list/occurrence-list.component';
-import { SearchComponent } from './structure/search/search.component';
+import { OccurrenceListComponent } from './datacomponents/occurrence/occurrence-list/occurrence-list.component';
+import { AlgorithmListComponent } from './datacomponents/algorithm/algorithm-list/algorithm-list.component';
 
 
 @NgModule({
@@ -53,7 +56,7 @@ import { SearchComponent } from './structure/search/search.component';
     MetacrawlComponent,
     ExperimentComponent,
     StepperComponent,
-    AlgorithmComponent,
+    AlgorithmListComponent,
     HomeComponent,
     FooterComponent,
     SpeciesListComponent,

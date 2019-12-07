@@ -18,7 +18,8 @@ const app = express();
 
 mongoose
   .connect(
-    "mongodb+srv://johnboy:afc8w8DRasUcZpBR@cluster0-mdduj.mongodb.net/node-angular?retryWrites=true&w=majority", {
+    //"mongodb+srv://johnboy:afc8w8DRasUcZpBR@cluster0-mdduj.mongodb.net/node-angular?retryWrites=true&w=majority", {
+      "mongodb+srv://aaron:12345@aaronramos-p5j6l.mongodb.net/elseweb?retryWrites=true&w=majority", {
       useNewUrlParser: true
     })
     .then(() => {

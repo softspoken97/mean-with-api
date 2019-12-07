@@ -1,125 +1,128 @@
-
-<mat-horizontal-stepper [linear]="isLinear" #stepper>
-    <mat-step [stepControl]="homeFormGroup">
-        <form [formGroup]="homeFormGroup">
-          <ng-template matStepLabel>Begin Experiment</ng-template>
-          <h1 style="text-align:left;">Species Distribution as predicted by Climatology models</h1><div>
-              <button mat-button matStepperNext><h2>Lets Get Started!</h2> (click here to select a species)</button>
-            </div>
-
-          <div class="container"></div>
-          <div class="box1" width='auto'><app-home></app-home></div>
-
-
-        </form>
-      </mat-step>
-  <mat-step [stepControl]="firstFormGroup">
-    <form [formGroup]="firstFormGroup">
+<form id="expForm" [formGroup]="experimentForm" (ngSubmit)="onSubmit()">
+  <mat-horizontal-stepper [linear]="isLinear" #stepper>
+    <mat-step>
+      <ng-template matStepLabel>Begin Experiment</ng-template>
+      <h1 style="text-align:left;">
+        Species Distribution as predicted by Climatology models
+      </h1>
+      <div>
+        <button mat-button matStepperNext>
+          <h2>Lets Get Started!</h2>
+          (click here to select a species)
+        </button>
+      </div>
+      <div class="container"></div>
+      <div class="box1" width="auto"><app-home></app-home></div>
+    </mat-step>
+    <!--Occurrences Form-->
+    <mat-step
+      formGroupName="occurrencesForm"
+      [stepControl]="experimentForm.get('occurrencesForm')"
+    >
       <ng-template matStepLabel>Species Selection</ng-template>
       <div>
-          <button mat-button matStepperNext>Next</button>
-        </div>
-      <div class="container">
-          <h1 style="text-align:center;">Please select the SPECIES you want to model for this experiment</h1>
-
-      <div class="box1" width='auto'>
-        <app-species-list></app-species-list>
+        <button mat-button matStepperNext>Next</button>
       </div>
-      <mat-form-field>
-        <input matInput placeholder="Species" formControlName="firstCtrl" required>
-      </mat-form-field></div>
-
-    </form>
-  </mat-step>
-  <mat-step [stepControl]="secondFormGroup">
-    <form [formGroup]="secondFormGroup">
+      <div class="container">
+        <h1 style="text-align:center;">
+          Please select the SPECIES you want to model for this experiment
+        </h1>
+        <div class="box1" width="auto">
+          <app-occurrence-list [expForm]="experimentForm"></app-occurrence-list>
+        </div>
+      </div>
+    </mat-step>
+    <!--Scenarios Form-->
+    <mat-step
+      formGroupName="scenariosForm"
+      [stepControl]="experimentForm.get('scenariosForm')"
+    >
       <ng-template matStepLabel>Scenario Selection</ng-template>
       <div>
-          <button mat-button matStepperPrevious>Back</button>
-          <button mat-button matStepperNext>Next</button>
-        </div>
+        <button mat-button matStepperPrevious>Back</button>
+        <button mat-button matStepperNext>Next</button>
+      </div>
       <div class="container">
-          <h1 style="text-align:center;">Please select the SCENARIO you want to model for this experiment</h1>
-
-      <div class="box1" width='auto'><app-scenario-list></app-scenario-list></div>
-      <mat-form-field>
-        <input matInput placeholder="Scenario" formControlName="secondCtrl" required>
-      </mat-form-field> </div>
-
-    </form>
-  </mat-step>
-  <mat-step [stepControl]="thirdFormGroup">
-    <form [formGroup]="thirdFormGroup">
+        <h1 style="text-align:center;">
+          Please select the SCENARIO you want to model for this experiment
+        </h1>
+        <div class="box1" width="auto">
+          <app-scenario-list [expForm]="experimentForm"></app-scenario-list>
+        </div>
+      </div>
+    </mat-step>
+    <!--Layers Form (We don't need it at this moment)-->
+    <!--
+    <mat-step [stepControl]="thirdFormGroup">
       <ng-template matStepLabel>Environmental Layers</ng-template>
       <div>
-          <button mat-button matStepperPrevious>Back</button>
-          <button mat-button matStepperNext>Next</button>
-        </div>
+        <button mat-button matStepperPrevious>Back</button>
+        <button mat-button matStepperNext>Next</button>
+      </div>
       <div class="container">
-          <h1 style="text-align:center;">Please select the ENVIRONMENTAL LAYERS for this experiment</h1>
-
-      <div class="box1" width='auto'><app-layer-list></app-layer-list></div>
-      <mat-form-field>
-        <input matInput placeholder="Layers" formControlName="thirdCtrl" required>
-      </mat-form-field></div>
-
-    </form>
-  </mat-step>
-  <mat-step [stepControl]="algorithmFormGroup">
-    <form [formGroup]="algorithmFormGroup">
+        <h1 style="text-align:center;">
+          Please select the ENVIRONMENTAL LAYERS for this experiment
+        </h1>
+        <div class="box1" width="auto"><app-layer-list></app-layer-list></div>
+      </div>
+    </mat-step> -->
+    <!--Algorithms Form-->
+    <mat-step
+      formGroupName="algorithmsForm"
+      [stepControl]="experimentForm.get('algorithmsForm')"
+    >
       <ng-template matStepLabel>Algorithm Selection</ng-template>
       <div>
-          <button mat-button matStepperPrevious>Back</button>
-          <button mat-button matStepperNext>Next</button>
-        </div>
+        <button mat-button matStepperPrevious>Back</button>
+        <button mat-button matStepperNext>Next</button>
+      </div>
       <div class="container">
-          <h1 style="text-align:center;">Please select the ALGORITHM you want to model for this experiment</h1>
-
-      <div class="box1" width='auto'><app-algorithm></app-algorithm></div>
-      <mat-form-field>
-        <input matInput placeholder="Algorithm" formControlName="algorithmCtrl" required>
-      </mat-form-field>
-
-    </div>
-
-    </form>
-  </mat-step>
-  <mat-step [stepControl]="fifthFormGroup">
-      <form [formGroup]="fifthFormGroup">
-        <ng-template matStepLabel>Review and Submit Experiment</ng-template>
-        <div>
-            <button mat-button matStepperPrevious>Back</button>
-            <button mat-button matStepperNext>Submit Experiment</button>
-          </div>
-        <div class="container">
-            <h1 style="text-align:center;">Please REVIEW your selections and SUBMIT the experiment!</h1>
+        <h1 style="text-align:center;">
+          Please select the ALGORITHM you want to model for this experiment
+        </h1>
+        <div class="box1" width="auto">
+          <app-algorithm [expForm]="experimentForm"></app-algorithm>
         </div>
-        <div class="box1" width='auto'><app-occurrence-list></app-occurrence-list></div>
-
-        <mat-form-field>
-          <input matInput placeholder="Review" formControlName="fifthCtrl" required>
-        </mat-form-field>
-
-      </form>
+      </div>
+    </mat-step>
+    <mat-step [stepControl]="submitForm">
+      <ng-template matStepLabel>Review and Submit Experiment</ng-template>
+      <div>
+        <button mat-button matStepperPrevious>Back</button>
+      </div>
+      <div class="container">
+        <h1 style="text-align:center;">
+          Please REVIEW your selections and SUBMIT the experiment!
+        </h1>
+        <h4>Occurrence:</h4>
+        <p>{{ experimentForm.get("occurrencesForm").value | json }}</p>
+        <h4>Scenario:</h4>
+        <p>{{ experimentForm.get("scenariosForm").value | json }}</p>
+        <h4>Algorithm:</h4>
+        <p>{{ experimentForm.get("algorithmsForm").value | json }}</p>
+        <button type="submit">Submit</button>
+      </div>
     </mat-step>
 
-  <mat-step>
-    <ng-template matStepLabel>Experiment Submitted</ng-template>
-    <div>
-      <button mat-button matStepperPrevious>Back</button>
-      <button mat-button (click)="stepper.reset()">Reset</button>
-    </div>
-    <div class="container">
-        <h1 style="text-align:center;">Your Results will populate below as they are returned from the model</h1>
-    </div>
-    <div class="wrapper">
+    <mat-step>
+      <ng-template matStepLabel>Experiment Submitted</ng-template>
+      <div>
+        <button mat-button matStepperPrevious>Back</button>
+        <button mat-button (click)="stepper.reset()">Reset</button>
+      </div>
+      <div class="container">
+        <h1 style="text-align:center;">
+          Your Results will populate below as they are returned from the model
+        </h1>
+      </div>
+      <div class="wrapper">
         <div class="box1"><app-esri></app-esri></div>
         <div class="box2"><app-metacrawl></app-metacrawl></div>
         <div class="item3"></div>
       </div>
-  </mat-step>
-</mat-horizontal-stepper>
-
+    </mat-step>
+  </mat-horizontal-stepper>
+</form>
 
 <!-- Copyright 2019 Google LLC. All Rights Reserved.
     Use of this source code is governed by an MIT-style license that
