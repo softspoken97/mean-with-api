@@ -6,13 +6,10 @@ const AlgorithmSchema = new mongoose.Schema({
   "link": String,
   "software": String,
   "description": String,
-  "parameters": [
-  ],
-
+  "parameters": [],
   "code": String,
   "name": String,
   "version": String,
-
 });
 
 const Algorithm = mongoose.model("Algorithm", AlgorithmSchema);

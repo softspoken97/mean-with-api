@@ -1,4 +1,4 @@
-import { Component, OnInit, Input} from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter} from '@angular/core';
 import { AlgorithmService } from '../algorithm.service';
 import { Subscription, Observable } from 'rxjs';
 import {FormControl} from '@angular/forms';
@@ -18,6 +18,7 @@ export class AlgorithmListComponent implements OnInit {
   algorithmCtrl = new FormControl();
   filteredAlgorithm: Observable<IAlgorithm[]>;
   selectedAlgorithm: [];
+  algorithmJson: IAlgorithm;
 
   public algorithms = [];
 
@@ -30,6 +31,7 @@ export class AlgorithmListComponent implements OnInit {
    }
 
    @Input() expForm: FormGroup;
+   @Output() algorithmSelected = new EventEmitter<IAlgorithm>();
 
    private _filterAlgorithm(value: string): IAlgorithm[] {
     const filterValue = value.toLowerCase();
@@ -37,9 +39,8 @@ export class AlgorithmListComponent implements OnInit {
     return this.algorithms.filter(algorithms => algorithms.name.toLowerCase().indexOf(filterValue) === 0);
   }
   ngOnInit() {
-    this.algorithmService.getAlgorithm()
+    this.algorithmService.getAlgorithms()
     .subscribe(data => this.algorithms = data);
-    console.log(this.algorithms);
     }
 
     displayFn(algorithm?: IAlgorithm): string | undefined {
@@ -48,6 +49,8 @@ export class AlgorithmListComponent implements OnInit {
 
     save() {
       this.expForm.get('algorithmsForm').setValue(this.algorithmCtrl.value);
+      this.algorithmJson = this.algorithmCtrl.value;
+      this.algorithmSelected.emit(this.algorithmJson);
       console.log(this.algorithmCtrl.value);
     }
   }

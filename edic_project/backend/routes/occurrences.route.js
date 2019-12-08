@@ -13,7 +13,7 @@ router.get('/getall', async (req, res) => {
   }
 });
 
-/* GET by id */
+// GET by id
 router.get('/get', async (req, res) => {
   const occurrence = await OccurrenceModel.findOne(req.query);
   try {
@@ -23,14 +23,15 @@ router.get('/get', async (req, res) => {
   }
 });
 
+
 /* GET metadata from url by id */
-router.get('/getmetadata', async (req, res) => {
+router.get('/metadata', async (req, res) => {
   const occurrence = await OccurrenceModel.findOne(req.query);
   try {
     console.log(occurrence.url);
     request(occurrence.url, function (error, response, body) {
         try {
-            res.send(body);
+            res.send(JSON.parse(body));
           } catch (err) {
             res.status(500).send(err);
           }

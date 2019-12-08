@@ -16,6 +16,7 @@ API_KEY = 'YOUR_API_KEY';
 
   getScenarios(): Observable<IScenario[]> {
     // tslint:disable-next-line: max-line-length
-    return this.httpClient.get<IScenario[]>(this._url);
+    const url = this._url + '/getall';
+    return this.httpClient.get<IScenario[]>(url);
   }
 }

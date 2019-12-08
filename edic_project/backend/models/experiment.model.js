@@ -18,7 +18,7 @@ const ExperimentSchema = new mongoose.Schema({
         algorithm: [
           {
             code: String,
-            parameters: Object
+            parameters: []
           }
         ]
       },

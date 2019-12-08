@@ -1,4 +1,4 @@
-import { Component, OnInit, Input} from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter} from '@angular/core';
 import { Subscription, Observable } from 'rxjs';
 import {FormControl} from '@angular/forms';
 import {map, startWith} from 'rxjs/operators';
@@ -31,6 +31,7 @@ export class OccurrenceListComponent implements OnInit {
   }
 
   @Input() expForm: FormGroup;
+  @Output() occurrenceSelected = new EventEmitter<IOccurrence>();
 
   private _filterOccurrences(value: string): IOccurrence[] {
     const filterValue = value.toLowerCase();
@@ -40,14 +41,6 @@ export class OccurrenceListComponent implements OnInit {
   ngOnInit() {
     this.occurrencesService.getOccurrence()
     .subscribe(data => this.occurrences = data);
-    this.occurrencesJson = {
-      _id: '',
-      url: '',
-      epsg: 0,
-      id: 0,
-      name: '',
-      modificationTime: new Date};
-    console.log(this.occurrences);
     }
 
     displayFn(occurrence?: IOccurrence): string | undefined {
@@ -58,6 +51,7 @@ export class OccurrenceListComponent implements OnInit {
       this.expForm.get('occurrencesForm').setValue(this.occurrencesCtrl.value);
       const obj = this.expForm.getRawValue();
       this.occurrencesJson = this.occurrencesCtrl.value;
+      this.occurrenceSelected.emit(this.occurrencesJson);
       console.log(this.occurrencesCtrl.value);
       console.log(this.occurrencesJson);
     }

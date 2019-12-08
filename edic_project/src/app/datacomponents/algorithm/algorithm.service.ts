@@ -14,8 +14,8 @@ export class AlgorithmService {
 
   constructor(private httpClient: HttpClient) { }
 
-  getAlgorithm(): Observable<IAlgorithm[]> {
-
-    return this.httpClient.get<IAlgorithm[]>(this._url);
+  getAlgorithms(): Observable<IAlgorithm[]> {
+    const url = this._url + '/getall';
+    return this.httpClient.get<IAlgorithm[]>(url);
   }
 }

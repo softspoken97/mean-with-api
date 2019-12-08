@@ -1,33 +1,50 @@
-<div id="algorithmsForm" [formGroup]="expForm"><mat-card class="workspace">
+<div id="algorithmsForm" [formGroup]="expForm">
+  <mat-card class="workspace">
     <mat-card-header>
-      <mat-card-title>Description of Algorithms available for your experiment</mat-card-title>
-        <mat-card-subtitle>Choose the algorithm and its options to use for modeling your experiment</mat-card-subtitle>
+      <mat-card-title
+        >Description of Algorithms available for your experiment</mat-card-title
+      >
+      <mat-card-subtitle
+        >Choose the algorithm and its options to use for modeling your
+        experiment</mat-card-subtitle
+      >
     </mat-card-header>
 
-  <form [formGroup]='' class="search-form">
-    <mat-form-field class="search-full-width">
-      <input matInput placeholder="Algorithm" aria-label="Algorithm Selection" [matAutocomplete]="auto"
-      [formControl]="algorithmCtrl">
-      <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn" (optionSelected)="save()">
-        <mat-option *ngFor="let algorithm of algorithms" [(value)]="algorithm">
-          <span>{{algorithm.name}}</span> |
-        </mat-option>
-      </mat-autocomplete>
-    </mat-form-field>
+    <div class="search-form">
+      <mat-form-field class="search-full-width">
+        <input
+          matInput
+          placeholder="Algorithm"
+          aria-label="Algorithm Selection"
+          [matAutocomplete]="auto"
+          [formControl]="algorithmCtrl"
+        />
+        <mat-autocomplete
+          #auto="matAutocomplete"
+          [displayWith]="displayFn"
+          (optionSelected)="save()"
+        >
+          <mat-option
+            *ngFor="let algorithm of algorithms"
+            [(value)]="algorithm"
+          >
+            <span>{{ algorithm.name }}</span> |
+          </mat-option>
+        </mat-autocomplete>
+      </mat-form-field>
 
-    <p>{{expForm.get('algorithmsForm').value | json}} </p>
+      <div *ngIf="expForm.get('algorithmsForm').value != ''">
+        <h4>Name:</h4>
+        <p>{{ algorithmJson.name }}</p>
+        <h4>Parameters:</h4>
+        <p *ngFor="let param of algorithmJson.parameters">
+          {{ param.displayName }} :
+          <input type="text" value="{{ param.default }}" />
+        </p>
+      </div>
+      <br />
+    </div>
 
-    <br>
-
-
-  </form>
-
-
-
-
-        <mat-card-actions></mat-card-actions>
+    <mat-card-actions></mat-card-actions>
   </mat-card>
 </div>
-
-
-

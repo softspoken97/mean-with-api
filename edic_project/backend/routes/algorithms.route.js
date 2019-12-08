@@ -4,23 +4,23 @@ const AlgorithmModel = require('../models/algorithm.model');
 const checkAuth = require("../middleware/check-auth");
 
 /* GET all */
-router.get('/', async (req, res) => {
-    const algorithms = await AlgorithmModel.find({});
-    try {
-      res.send(algorithms);
-    } catch (err) {
-      res.status(500).send(err);
-    }
-  });
-
-
-router.get("/api/v1/:id", (req, res, next) => {
-  AlgorithmModel.findById(req.params.id).then(algorithms => {
-    if (algorithms) {
-      res.status(200).json(algorithms);
-    } else {
-      res.status(404).json({ message: "Post not found!" });
-    }
-  });
+router.get('/getall', async (req, res) => {
+  const algorithms = await AlgorithmModel.find({});
+  try {
+    res.send(algorithms);
+  } catch (err) {
+    res.status(500).send(err);
+  }
 });
+
+/* GET by id */
+router.get('/get', async (req, res) => {
+  const algorithm = await AlgorithmModel.findOne(req.query);
+  try {
+    res.send(algorithm);
+  } catch (err) {
+    res.status(500).send(err);
+  }
+});
+
 module.exports = router;

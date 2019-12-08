@@ -1,23 +1,39 @@
 <div id="scenariosForm" [formGroup]="expForm">
-<mat-card class="workspace">
+  <mat-card class="workspace">
     <mat-card-header>
       <mat-card-title>Climate Scenarios Service Description</mat-card-title>
-        <mat-card-subtitle>Choose the Scenario to model for your experiment</mat-card-subtitle>
+      <mat-card-subtitle
+        >Choose the Scenario to model for your experiment</mat-card-subtitle
+      >
     </mat-card-header>
-
+    <div class="search-form">
     <mat-form-field class="search-full-width">
-      <input matInput placeholder="Scenario" aria-label="Scenario Selection" [matAutocomplete]="auto"
-      [formControl]="scenariosCtrl">
-      <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn" (optionSelected)="save()">
-        <mat-option *ngFor="let scenario of scenarios" [(value)]='scenario'>
-          <span>{{scenario.name}}</span>
+      <input
+        matInput
+        placeholder="Scenario"
+        aria-label="Scenario Selection"
+        [matAutocomplete]="auto"
+        [formControl]="scenariosCtrl"
+      />
+      <mat-autocomplete
+        #auto="matAutocomplete"
+        [displayWith]="displayFn"
+        (optionSelected)="save()"
+      >
+        <mat-option *ngFor="let scenario of scenarios" [(value)]="scenario">
+          <span>{{ scenario.name }}</span>
         </mat-option>
-
-
-
       </mat-autocomplete>
     </mat-form-field>
+  </div>
 
-    <p>{{expForm.get('scenariosForm').value | json}} </p>
+  <div *ngIf="expForm.get('scenariosForm').value != ''">
+      <h4>Name:</h4>
+      <p>{{ scenarioJson.name }}</p>
+      <h4>ID:</h4>
+      <p>{{ scenarioJson.id }}</p>
+      <h4>Metadata Url:</h4>
+      <p>{{ scenarioJson.url }}</p>
+  </div>
   </mat-card>
 </div>

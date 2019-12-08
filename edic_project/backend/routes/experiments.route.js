@@ -4,6 +4,19 @@ const ExperimentModel = require('../models/experiment.model');
 const SDMProjectionModel = require('../models/SDMProjection.model');
 const request = require('request');
 
+const ExperimentService = require('../services/postExperiment.service');
+
+
+// GET by id
+/*router.get('/get', async (req, res) => {
+  const occurrence = await OccurrenceModel.findOne(req.query);
+  try {
+    res.send(occurrence);
+  } catch (err) {
+    res.status(500).send(err);
+  }
+});*/
+
 /* POST Experiment to lifemapper */
 router.post('/submit', async (req, res) => {
     console.log(req.query);
@@ -92,5 +105,39 @@ router.post('/submit', async (req, res) => {
     });
 
 });
+
+router.post('/submit2', async (req, res) => {
+  console.log(req.body);
+  const json = ExperimentService.test(req.body);
+  try {
+    res.send(json);
+  } catch (err) {
+    res.status(500).send(err);
+  }
+  //const experiment = new ExperimentModel(req.query);
+  /*const options = {
+    method: 'POST',
+    url: 'http://client.lifemapper.org/api/v2/sdmProject',
+    headers: {
+      'Content-Type': 'application/json',
+      'Accept': 'application/json'
+    },
+    json: req.query
+  };
+
+  request.post(options, function (error, response, body) {
+    try {
+      //const SDMProjection = new SDMProjectionModel(body);
+      //SDMProjection.save();
+      console.log(body);
+      res.send(body);
+    } catch (err) {
+      res.status(500).send(err);
+      }
+  });*/
+
+});
+
+
 
 module.exports = router;

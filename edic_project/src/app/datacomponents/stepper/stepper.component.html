@@ -28,7 +28,7 @@
           Please select the SPECIES you want to model for this experiment
         </h1>
         <div class="box1" width="auto">
-          <app-occurrence-list [expForm]="experimentForm"></app-occurrence-list>
+          <app-occurrence-list [expForm]="experimentForm" (occurrenceSelected) = "getOccurrence($event)"></app-occurrence-list>
         </div>
       </div>
     </mat-step>
@@ -47,7 +47,7 @@
           Please select the SCENARIO you want to model for this experiment
         </h1>
         <div class="box1" width="auto">
-          <app-scenario-list [expForm]="experimentForm"></app-scenario-list>
+          <app-scenario-list [expForm]="experimentForm" (scenarioSelected) = "getScenario($event)"></app-scenario-list>
         </div>
       </div>
     </mat-step>
@@ -81,7 +81,7 @@
           Please select the ALGORITHM you want to model for this experiment
         </h1>
         <div class="box1" width="auto">
-          <app-algorithm [expForm]="experimentForm"></app-algorithm>
+          <app-algorithm [expForm]="experimentForm" (algorithmSelected) = "getAlgorithm($event)"></app-algorithm>
         </div>
       </div>
     </mat-step>
@@ -94,13 +94,31 @@
         <h1 style="text-align:center;">
           Please REVIEW your selections and SUBMIT the experiment!
         </h1>
-        <h4>Occurrence:</h4>
-        <p>{{ experimentForm.get("occurrencesForm").value | json }}</p>
-        <h4>Scenario:</h4>
-        <p>{{ experimentForm.get("scenariosForm").value | json }}</p>
-        <h4>Algorithm:</h4>
-        <p>{{ experimentForm.get("algorithmsForm").value | json }}</p>
-        <button type="submit">Submit</button>
+        <mat-card *ngIf="experimentForm.get('occurrencesForm').value != ''">
+            <h4>Occurrence:</h4>
+            <p >{{ occurrenceSelected.name }}</p>
+        </mat-card>
+        <mat-card *ngIf="experimentForm.get('scenariosForm').value != ''">
+            <h4>Scenario:</h4>
+            <p >{{ scenarioSelected.name }}</p>
+        </mat-card>
+        <mat-card *ngIf="experimentForm.get('algorithmsForm').value != ''">
+            <h3>Algorithm:</h3>
+            <p >Name: {{ algorithmSelected.name }}</p>
+            <h4>Parameters:</h4>
+            <p *ngFor="let param of algorithmSelected.parameters">
+                {{ param.displayName }} : {{ param.default }}
+              </p>
+        </mat-card>
+
+        <div *ngIf="!formSubmitted" style="text-align:center;">
+            <button mat-raised-button color="primary" type="submit">Submit</button>
+        </div>
+        <mat-card *ngIf="formSubmitted">
+            <h4>Results</h4>
+            <p> {{ experimentResult | json }}</p>
+        </mat-card>
+
       </div>
     </mat-step>
 
@@ -117,10 +135,23 @@
       </div>
       <div class="wrapper">
         <div class="box1"><app-esri></app-esri></div>
-        <div class="box2"><app-metacrawl></app-metacrawl></div>
-        <div class="item3"></div>
       </div>
     </mat-step>
+    <mat-step>
+        <ng-template matStepLabel>Experiment Submitted</ng-template>
+        <div>
+          <button mat-button matStepperPrevious>Back</button>
+          <button mat-button (click)="stepper.reset()">Reset</button>
+        </div>
+        <div class="container">
+          <h1 style="text-align:center;">
+            Your Results will populate below as they are returned from the model
+          </h1>
+        </div>
+        <div class="wrapper">
+          <div class="box2"><app-metacrawl></app-metacrawl></div>
+        </div>
+      </mat-step>
   </mat-horizontal-stepper>
 </form>
 

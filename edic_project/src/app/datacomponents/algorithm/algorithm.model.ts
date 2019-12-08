@@ -4,7 +4,10 @@ export interface IAlgorithm {
   link: string;
   software: string;
   description: string;
-  parameters: object;
+  parameters: [{
+    displayName: string;
+    default: string;
+  }];
   code: string;
   name: string;
   version: number;

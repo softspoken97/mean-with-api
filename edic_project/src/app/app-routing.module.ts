@@ -22,14 +22,14 @@ import { AlgorithmListComponent } from './datacomponents/algorithm/algorithm-lis
 
 
 const routes: Routes = [
-  { path: '', component: PostListComponent },
+  { path: '', component: ExperimentComponent },
   { path: 'create', component: PostCreateComponent, canActivate: [AuthGuard] },
   { path: 'edit/:postId', component: PostCreateComponent, canActivate: [AuthGuard] },
   { path: 'login', component: LoginComponent },
   { path: 'signup', component: SignupComponent },
   { path: 'esri', component: EsriComponent },
   { path: 'metacrawl', component: MetacrawlComponent },
-  { path: 'experiment', component: ExperimentComponent },
+  // { path: 'experiment', component: ExperimentComponent },
   { path: 'stepper', component: StepperComponent },
   { path: 'algorithm', component: AlgorithmListComponent },
   { path: 'home', component: HomeComponent },

@@ -1,4 +1,4 @@
-import { Component, OnInit, Input} from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter} from '@angular/core';
 import { Subscription, Observable } from 'rxjs';
 import {FormControl} from '@angular/forms';
 import {map, startWith} from 'rxjs/operators';
@@ -18,6 +18,8 @@ export class ScenarioListComponent implements OnInit {
   filteredScenario: Observable<IScenario[]>;
   selectedScenario: '';
   public scenarios: IScenario[] = [];
+  scenarioJson: IScenario;
+
 
   constructor(private scenarioService: ScenarioService) {
     this.filteredScenario = this.scenariosCtrl.valueChanges
@@ -28,6 +30,7 @@ export class ScenarioListComponent implements OnInit {
    }
 
    @Input() expForm: FormGroup;
+   @Output() scenarioSelected = new EventEmitter<IScenario>();
 
    private _filterScenario(value: string): IScenario[] {
     const filterValue = value.toLowerCase();
@@ -47,6 +50,8 @@ export class ScenarioListComponent implements OnInit {
 
     save() {
       this.expForm.get('scenariosForm').setValue(this.scenariosCtrl.value);
+      this.scenarioJson = this.scenariosCtrl.value;
+      this.scenarioSelected.emit(this.scenarioJson);
       console.log(this.scenariosCtrl.value);
     }
   }
