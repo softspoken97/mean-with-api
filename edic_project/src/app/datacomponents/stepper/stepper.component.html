@@ -111,13 +111,15 @@
               </p>
         </mat-card>
 
-        <div *ngIf="!formSubmitted" style="text-align:center;">
-            <button mat-raised-button color="primary" type="submit">Submit</button>
-        </div>
         <mat-card *ngIf="formSubmitted">
             <h4>Results</h4>
+            <mat-spinner *ngIf="experimentResult == null" ></mat-spinner>
             <p> {{ experimentResult | json }}</p>
         </mat-card>
+
+        <div style="text-align:center;">
+          <button mat-raised-button color="primary" type="submit">Submit</button>
+      </div>
 
       </div>
     </mat-step>

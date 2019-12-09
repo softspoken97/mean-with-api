@@ -28,7 +28,6 @@ router.get('/get', async (req, res) => {
 router.get('/metadata', async (req, res) => {
   const occurrence = await OccurrenceModel.findOne(req.query);
   try {
-    console.log(occurrence.url);
     request(occurrence.url, function (error, response, body) {
         try {
             res.send(JSON.parse(body));

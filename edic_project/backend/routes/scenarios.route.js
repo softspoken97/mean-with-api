@@ -2,6 +2,7 @@ var express = require('express');
 var router = express.Router();
 const ScenarioModel = require('../models/scenario.model');
 const checkAuth = require("../middleware/check-auth");
+const request = require('request');
 
 //Get all scenarios
 router.get('/getall', async (req, res) => {

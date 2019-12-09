@@ -2,7 +2,7 @@ var express = require('express');
 var router = express.Router();
 //const OcurrenceModel = require('../models/ocurrence.model');
 const request = require('request');
-const SpeciesModel = require('../models/species.model');
+const SpeciesModel = require('../models/specieMetadata.model');
 const checkAuth = require("../middleware/check-auth");
 
 
